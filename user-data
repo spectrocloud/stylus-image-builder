@@ -1,0 +1,22 @@
+install:
+  reboot: false
+  poweroff: false
+stylus:
+  trace: true
+  site:
+    paletteEndpoint: ""
+    registrationURL: ""
+stages:
+  boot:
+    - hostname: localhost
+  after-install:
+    - files:
+        - path: /var/run/.stylus-installed
+          content: ""
+          permissions: 0777
+  initramfs:
+    - users:
+        kairos:
+          groups:
+            - sudo
+          passwd: kairos

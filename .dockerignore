@@ -1,0 +1,8 @@
+images
+Dockerfile
+README.md
+Makefile
+*.qcow2
+*.raw
+*.img
+*.vmdk
