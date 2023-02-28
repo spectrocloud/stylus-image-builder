@@ -26,10 +26,3 @@ stages:
           groups:
             - sudo
           passwd: kairos
-
-
-
-
-
-
-
