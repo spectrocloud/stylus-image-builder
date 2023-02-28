@@ -6,10 +6,16 @@ stylus:
   site:
     paletteEndpoint: ""
     registrationURL: ""
+    edgeHostToken: ""
 stages:
   boot:
     - hostname: localhost
-  after-install:
+  before-install:
+    - name: "Remove machine-id"
+      if: '[ -f "/run/cos/live_mode" ]'
+      commands:
+      - echo -n > /etc/machine-id
+  after-install.after:
     - files:
         - path: /var/run/.stylus-installed
           content: ""
@@ -20,3 +26,10 @@ stages:
           groups:
             - sudo
           passwd: kairos
+
+
+
+
+
+
+

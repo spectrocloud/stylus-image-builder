@@ -23,6 +23,10 @@ fi
 echo "Writing user-data file"
 yq e -i '.stylus.site.paletteEndpoint = env(PALETTE_ENDPOINT)' user-data
 yq e -i '.stylus.site.registrationURL = env(REGISTRATION_URL)' user-data
+if [ -z "$EDGE_HOST_TOKEN" ]; then
+  yq e -i '.stylus.site.edgeHostToken = env(EDGE_HOST_TOKEN)' user-data
+fi
+
 echo "----------------------USERDATA----------------------"
 cat user-data
 echo "----------------------USERDATA----------------------"

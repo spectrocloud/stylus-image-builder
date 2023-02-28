@@ -8,7 +8,7 @@ EMBED?="true"
 
 PALETTE_ENDPOINT?=""
 REGISTRATION_URL?=""
-DISK_SIZE?="50000M"
+DISK_SIZE?="80000M"
 
 define run
 	docker run \
