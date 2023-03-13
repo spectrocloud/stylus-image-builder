@@ -10,8 +10,8 @@ if [ -z "$PALETTE_ENDPOINT" ]; then
   exit 1
 fi
 
-if [ -z "$REGISTRATION_URL" ]; then
-  echo "Environment Variable REGISTRATION_URL must be set"
+if [[ -z "$REGISTRATION_URL" && -z $EDGE_HOST_TOKEN ]]; then
+  echo "Environment Variable REGISTRATION_URL or EDGE_HOST_TOKEN must be set"
   exit 1
 fi
 
@@ -22,8 +22,10 @@ fi
 
 echo "Writing user-data file"
 yq e -i '.stylus.site.paletteEndpoint = env(PALETTE_ENDPOINT)' user-data
-yq e -i '.stylus.site.registrationURL = env(REGISTRATION_URL)' user-data
-if [ -z "$EDGE_HOST_TOKEN" ]; then
+if [ ! -z "$REGISTRATION_URL" ]; then
+  yq e -i '.stylus.site.registrationURL = env(REGISTRATION_URL)' user-data
+fi
+if [ ! -z "$EDGE_HOST_TOKEN" ]; then
   yq e -i '.stylus.site.edgeHostToken = env(EDGE_HOST_TOKEN)' user-data
 fi
 

@@ -2,7 +2,7 @@ REPO?=spectrocloud/stylus-image-builder
 TAG?=latest
 CONTAINER_NAME?=stylus-image-builder
 
-ISO_URL?="https://stylus-spectro.s3.us-west-2.amazonaws.com/stylus-v2.0.7-amd64.iso"
+ISO_URL?="https://stylus-spectro.s3.us-west-2.amazonaws.com/v3.2.1/stylus-v3.2.1-amd64.iso"
 ISO_NAME= $(shell basename $(ISO_URL) .iso)
 EMBED?="true"
 
@@ -28,7 +28,7 @@ images-dir:
 	mkdir -p images
 
 docker-build:
-	 docker build \
+	docker build \
 		--build-arg EMBED=$(EMBED) \
 		--build-arg ISO_URL=$(ISO_URL) \
 		--build-arg DISK_SIZE=$(DISK_SIZE) \
