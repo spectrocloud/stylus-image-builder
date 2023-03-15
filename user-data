@@ -8,8 +8,6 @@ stylus:
     registrationURL: ""
     edgeHostToken: ""
 stages:
-  boot:
-    - hostname: localhost
   before-install:
     - name: "Remove machine-id"
       if: '[ -f "/run/cos/live_mode" ]'
