@@ -2,8 +2,9 @@ build {
   name = "img"
   sources = ["source.qemu.stylus"]
   provisioner "shell" {
-    environment_vars = ["FILE=/var/run/.stylus-installed"]
     scripts = ["${path.root}/scripts/wait.sh"]
+    expect_disconnect = true
+    skip_clean = true
   }
 }
 
@@ -11,8 +12,9 @@ build {
   name = "vmdk"
   sources = ["source.qemu.stylus"]
   provisioner "shell" {
-    environment_vars = ["FILE=/var/run/.stylus-installed"]
     scripts = ["${path.root}/scripts/wait.sh"]
+    expect_disconnect = true
+    skip_clean = true
   }
   post-processor "shell-local" {
     environment_vars = ["CWD=${path.cwd}"]
@@ -24,8 +26,9 @@ build {
   name = "qcow2"
   sources = ["source.qemu.stylus"]
   provisioner "shell" {
-    environment_vars = ["FILE=/var/run/.stylus-installed"]
     scripts = ["${path.root}/scripts/wait.sh"]
+    expect_disconnect = true
+    skip_clean = true
   }
   post-processor "shell-local" {
     environment_vars = ["CWD=${path.cwd}"]
@@ -38,8 +41,9 @@ build {
   name = "iso"
   sources = ["source.qemu.stylus"]
   provisioner "shell" {
-    environment_vars = ["FILE=/var/run/.stylus-installed"]
     scripts = ["${path.root}/scripts/wait.sh"]
+    expect_disconnect = true
+    skip_clean = true
   }
   post-processor "shell-local" {
     environment_vars = ["CWD=${path.cwd}"]
