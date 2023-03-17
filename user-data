@@ -1,6 +1,6 @@
 install:
   reboot: false
-  poweroff: false
+  poweroff: true
 stylus:
   trace: true
   site:
@@ -13,11 +13,6 @@ stages:
       if: '[ -f "/run/cos/live_mode" ]'
       commands:
       - echo -n > /etc/machine-id
-  after-install.after:
-    - files:
-        - path: /var/run/.stylus-installed
-          content: ""
-          permissions: 0777
   initramfs:
     - users:
         kairos:
