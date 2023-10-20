@@ -9,7 +9,7 @@ source "qemu" "stylus" {
   ssh_username     = "kairos"
   ssh_password     = "kairos"
   ssh_timeout      = "20m"
-  cd_files         = ["${path.cwd}/meta-data", "${path.cwd}/user-data"]
+  cd_files         = []
   cd_label         = "cidata"
   vm_name          = "stylus-image-builder"
   net_device       = "virtio-net"
