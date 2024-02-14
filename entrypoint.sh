@@ -1,16 +1,7 @@
 #!/usr/bin/env bash
 
-if [ -z "$1" ]; then
-  echo "No image type defined"
-  exit 1
-fi
-
-if [ -z "$ISO_URL" ]; then
-  echo "Environment Variable ISO_URL must be set"
-  exit 1
-fi
-
-if [ -n "$PALETTE_ENDPOINT" ]; then
+function create_user_data {
+  echo "Creating user-data file"
   echo "PALETTE_ENDPOINT is set to: $PALETTE_ENDPOINT"
 
   if [ -z "$EDGE_HOST_TOKEN" ]; then
@@ -19,7 +10,6 @@ if [ -n "$PALETTE_ENDPOINT" ]; then
   fi
 
   mv user-data.template user-data
-  mv meta-data.template meta-data
   echo "Writing user-data file"
   yq e -i '.stylus.site.paletteEndpoint = env(PALETTE_ENDPOINT)' user-data
   if [ ! -z "$REGISTRATION_URL" ]; then
@@ -32,6 +22,27 @@ if [ -n "$PALETTE_ENDPOINT" ]; then
   echo "----------------------USERDATA----------------------"
   cat user-data
   echo "----------------------USERDATA----------------------"
+}
+
+if [ -z "$1" ]; then
+  echo "No image type defined"
+  exit 1
+fi
+
+if [ -z "$ISO_URL" ]; then
+  echo "Environment Variable ISO_URL must be set"
+  exit 1
+fi
+
+if [ ! -f "user-data" ]; then
+  if [ -n "$PALETTE_ENDPOINT" ]; then
+    create_user_data
+  else
+    echo "Environment Variable PALETTE_ENDPOINT must be set if user-data file is not present."
+    exit 1
+  fi
+else
+  echo "Found existing user-data file. Skip creating"
 fi
 
 # ISO should be in /stylus-image-builder/file.iso and can be mounted in or auto-downloaded if not embedded in image

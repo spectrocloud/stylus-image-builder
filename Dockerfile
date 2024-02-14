@@ -26,11 +26,11 @@ RUN wget -q https://releases.hashicorp.com/packer/1.8.4/packer_1.8.4_linux_amd64
     mv packer /usr/local/bin; \
     rm -f packer_1.8.4_linux_amd64.zip
 
-COPY ./ ./stylus-image-builder
-WORKDIR ./stylus-image-builder
+COPY ./ /stylus-image-builder
+WORKDIR /stylus-image-builder
 
 RUN if [ "true" = "$EMBED" ]; then \
-      wget -q $ISO_URL; \
+    wget -q $ISO_URL; \
     fi
 
 ENTRYPOINT ["/stylus-image-builder/entrypoint.sh"]
