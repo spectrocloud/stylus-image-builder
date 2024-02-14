@@ -2,21 +2,16 @@
 install:
   reboot: false
   poweroff: true
-stylus:
-  trace: true
-  site:
-    paletteEndpoint: ""
-    registrationURL: ""
-    edgeHostToken: ""
 stages:
   before-install:
     - name: "Remove machine-id"
       if: '[ -f "/run/cos/live_mode" ]'
       commands:
-      - echo -n > /etc/machine-id
+        - echo -n > /etc/machine-id
   initramfs:
     - users:
         kairos:
           groups:
             - sudo
           passwd: kairos
+      name: "Create kairos user"
