@@ -28,7 +28,7 @@ images-dir:
 	mkdir -p images
 
 docker-build:
-	docker build \
+	docker buildx build \
 		--build-arg EMBED=$(EMBED) \
 		--build-arg ISO_URL=$(ISO_URL) \
 		--build-arg DISK_SIZE=$(DISK_SIZE) \
