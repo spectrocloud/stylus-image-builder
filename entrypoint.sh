@@ -5,16 +5,6 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
-if [ -z "$PALETTE_ENDPOINT" ]; then
-  echo "Environment Variable PALETTE_ENDPOINT must be set"
-  exit 1
-fi
-
-if [[ -z "$REGISTRATION_URL" && -z $EDGE_HOST_TOKEN ]]; then
-  echo "Environment Variable REGISTRATION_URL or EDGE_HOST_TOKEN must be set"
-  exit 1
-fi
-
 if [ -z "$ISO_URL" ]; then
   echo "Environment Variable ISO_URL must be set"
   exit 1
