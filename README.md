@@ -113,6 +113,9 @@ transfers and processing. This format is the most portable and is sometimes call
 ### qcow2
 A compressed image format with thin provisioning support making it portable and supports snapshotting.
 
+### qcow2-image
+A compressed image format with thin provisioning support making it portable and supports snapshotting. This command generates disk image which can be used to provision VM using kubevirt.
+
 ### vmdk
 A format from VMWare used pervasively across their tooling. This will be the primary format for VCenter, VirtualBox and 
 VMWare Workstation. 

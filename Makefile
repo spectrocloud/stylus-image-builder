@@ -60,12 +60,12 @@ vmdk: clean-vmdk images-dir
 clean-vmdk:
 	-@docker rm ${CONTAINER_NAME}-vmdk 2>/dev/null
 
-qcow2: clean-qcow2 images-dir docker-build
+qcow2: clean-qcow2 images-dir
 	$(call run,"qcow2")
 	docker cp $(CONTAINER_NAME)-qcow2:/stylus-image-builder/images/stylus-image-builder.qcow2 ./images/$(ISO_NAME).qcow2
 	-@docker rm ${CONTAINER_NAME}-qcow2 2>/dev/null
 
-qcow2-image: qcow2
+qcow2-image:
 	docker buildx build -t $(QCOW2_IMG) -f Qcow2.Dockerfile --build-arg IMG_NAME=$(ISO_NAME).qcow2 .
 	docker push $(QCOW2_IMG)
 
