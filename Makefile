@@ -2,14 +2,16 @@ REPO?=spectrocloud/stylus-image-builder
 TAG?=latest
 CONTAINER_NAME?=stylus-image-builder
 
-ISO_URL?="https://stylus-spectro.s3.us-west-2.amazonaws.com/v3.2.1/stylus-v3.2.1-amd64.iso"
+ISO_URL?="stylus-v4.2.3-amd64.iso"
 ISO_NAME= $(shell basename $(ISO_URL) .iso)
-EMBED?="true"
+EMBED?="false"
+
+QCOW2_IMG?=gcr.io/spectro-dev-public/stylus/${ISO_NAME}:latest
 
 PALETTE_ENDPOINT?=""
 REGISTRATION_URL?=""
 EDGE_HOST_TOKEN?=""
-DISK_SIZE?="80000M"
+DISK_SIZE?="100000M"
 
 define run
 	docker run \
@@ -28,7 +30,7 @@ images-dir:
 	mkdir -p images
 
 docker-build:
-	docker build \
+	docker buildx build \
 		--build-arg EMBED=$(EMBED) \
 		--build-arg ISO_URL=$(ISO_URL) \
 		--build-arg DISK_SIZE=$(DISK_SIZE) \
@@ -62,6 +64,10 @@ qcow2: clean-qcow2 images-dir
 	$(call run,"qcow2")
 	docker cp $(CONTAINER_NAME)-qcow2:/stylus-image-builder/images/stylus-image-builder.qcow2 ./images/$(ISO_NAME).qcow2
 	-@docker rm ${CONTAINER_NAME}-qcow2 2>/dev/null
+
+qcow2-image:
+	docker buildx build -t $(QCOW2_IMG) -f Qcow2.Dockerfile --build-arg IMG_NAME=$(ISO_NAME).qcow2 .
+	docker push $(QCOW2_IMG)
 
 clean-qcow2:
 	-@docker rm ${CONTAINER_NAME}-qcow2 2>/dev/null

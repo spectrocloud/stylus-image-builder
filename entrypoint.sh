@@ -5,33 +5,10 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
-if [ -z "$PALETTE_ENDPOINT" ]; then
-  echo "Environment Variable PALETTE_ENDPOINT must be set"
-  exit 1
-fi
-
-if [[ -z "$REGISTRATION_URL" && -z $EDGE_HOST_TOKEN ]]; then
-  echo "Environment Variable REGISTRATION_URL or EDGE_HOST_TOKEN must be set"
-  exit 1
-fi
-
 if [ -z "$ISO_URL" ]; then
   echo "Environment Variable ISO_URL must be set"
   exit 1
 fi
-
-echo "Writing user-data file"
-yq e -i '.stylus.site.paletteEndpoint = env(PALETTE_ENDPOINT)' user-data
-if [ ! -z "$REGISTRATION_URL" ]; then
-  yq e -i '.stylus.site.registrationURL = env(REGISTRATION_URL)' user-data
-fi
-if [ ! -z "$EDGE_HOST_TOKEN" ]; then
-  yq e -i '.stylus.site.edgeHostToken = env(EDGE_HOST_TOKEN)' user-data
-fi
-
-echo "----------------------USERDATA----------------------"
-cat user-data
-echo "----------------------USERDATA----------------------"
 
 # ISO should be in /stylus-image-builder/file.iso and can be mounted in or auto-downloaded if not embedded in image
 isoFile=$(basename $ISO_URL)
