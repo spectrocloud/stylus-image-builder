@@ -2,7 +2,7 @@ REPO?=spectrocloud/stylus-image-builder
 TAG?=latest
 CONTAINER_NAME?=stylus-image-builder
 
-ISO_URL?="stylus-v4.2.3-amd64.iso"
+ISO_URL?="palette-edge-installer-v423.iso"
 ISO_NAME= $(shell basename $(ISO_URL) .iso)
 EMBED?="false"
 
