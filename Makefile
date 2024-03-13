@@ -35,7 +35,7 @@ docker-build:
 		--build-arg EMBED=$(EMBED) \
 		--build-arg ISO_URL=$(ISO_URL) \
 		--build-arg DISK_SIZE=$(DISK_SIZE) \
-		-t $(REPO):$(TAG) .
+		-t $(REPO):$(TAG) --load .
 
 docker-build-base:
 	docker buildx build -t $(BASE_IMG) -f Base.Dockerfile --push .
