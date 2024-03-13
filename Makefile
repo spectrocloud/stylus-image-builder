@@ -70,8 +70,7 @@ qcow2: clean-qcow2 images-dir
 	-@docker rm ${CONTAINER_NAME}-qcow2 2>/dev/null
 
 qcow2-image:
-	docker buildx build -t $(QCOW2_IMG) -f Qcow2.Dockerfile --build-arg IMG_NAME=$(ISO_NAME).qcow2 .
-	docker push $(QCOW2_IMG)
+	docker buildx build -t $(QCOW2_IMG) -f Qcow2.Dockerfile --build-arg IMG_NAME=$(ISO_NAME).qcow2 --push .
 
 clean-qcow2:
 	-@docker rm ${CONTAINER_NAME}-qcow2 2>/dev/null
