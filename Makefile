@@ -7,6 +7,7 @@ ISO_NAME= $(shell basename $(ISO_URL) .iso)
 EMBED?="false"
 
 QCOW2_IMG?=gcr.io/spectro-dev-public/stylus/${ISO_NAME}:latest
+BASE_IMG?=gcr.io/spectro-dev-public/stylus/stylus-image-builder-base:v1
 
 PALETTE_ENDPOINT?=""
 REGISTRATION_URL?=""
@@ -35,6 +36,9 @@ docker-build:
 		--build-arg ISO_URL=$(ISO_URL) \
 		--build-arg DISK_SIZE=$(DISK_SIZE) \
 		-t $(REPO):$(TAG) .
+
+docker-build-base:
+	docker buildx build -t $(BASE_IMG) -f Base.Dockerfile --push .
 
 img: clean-img images-dir
 	$(call run,"img")
