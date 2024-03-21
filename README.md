@@ -8,10 +8,11 @@ To create a pre-installed stylus image you need to:
 
 The three important pieces of data you will need before starting are the following
 1) PALETTE_ENDPOINT - This is the URL to the Palette tenant where you log in to manage your Kubernetes clusters.  
-2) ISO_URL - A stylus installation ISO, downloaded URLs can be found in the Palette UI, navigate to Clusters > Edge Hosts and in the upper right hand corner you wil see `Download Palette Edge Installer`. Additionally, an ISO_URL could be a local file which makes development faster.
+2) ISO_URL - A stylus installation ISO, downloaded URLs can be found in the Palette UI, navigate to Clusters > Edge Hosts and in the upper right hand corner you wil see `Download Palette Edge Installer`. Additionally, an ISO_URL could be a local file which makes development faster. Note: If the userdata is embedded as part of ISO, ensure that the 'poweroff' flag within the 'install' section of userdata is either set to true or omitted.
 3) Registration of edge nodes can be done via two methods, you only need one of the following.
    * REGISTRATION_URL - The URL to a custom registration web app for the edge host to embed with params in the generated QR code on boot.   
-   * EDGE_HOST_TOKEN - A project level token for auto-registration of edge nodes at boot time, these are made in the Palette UI in Tenant Settings > Registration Tokens.  
+   * EDGE_HOST_TOKEN - A project level token for auto-registration of edge nodes at boot time, these are made in the Palette UI in Tenant Settings > Registration Tokens. 
+ 
 
 ## Pre-Requisites
 ### [QEMU](https://www.qemu.org/)
