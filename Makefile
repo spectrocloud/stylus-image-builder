@@ -6,7 +6,8 @@ ISO_URL?="palette-edge-installer-v423.iso"
 ISO_NAME= $(shell basename $(ISO_URL) .iso)
 EMBED?="false"
 
-QCOW2_IMG?=gcr.io/spectro-dev-public/stylus/${ISO_NAME}:latest
+QCOW2_IMG?=gcr.io/spectro-dev-public/stylus/${ISO_NAME}:qcow2
+VMDK_IMG?=gcr.io/spectro-dev-public/stylus/${ISO_NAME}:vmdk
 BASE_IMG?=gcr.io/spectro-dev-public/stylus/stylus-image-builder-base:v1
 
 PALETTE_ENDPOINT?=""
@@ -70,7 +71,10 @@ qcow2: clean-qcow2 images-dir
 	-@docker rm ${CONTAINER_NAME}-qcow2 2>/dev/null
 
 qcow2-image:
-	docker buildx build -t $(QCOW2_IMG) -f Qcow2.Dockerfile --build-arg IMG_NAME=$(ISO_NAME).qcow2 --push .
+	docker buildx build -t $(QCOW2_IMG) -f Image.Dockerfile --build-arg IMG_NAME=$(ISO_NAME).qcow2 --push .
+
+vmdk-image:
+	docker buildx build -t $(VMDK_IMG) -f Image.Dockerfile --build-arg IMG_NAME=$(ISO_NAME).vmdk --push .
 
 clean-qcow2:
 	-@docker rm ${CONTAINER_NAME}-qcow2 2>/dev/null
