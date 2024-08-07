@@ -1,7 +1,6 @@
 #cloud-config
 install:
-  reboot: false
-  poweroff: false
+  poweroff: true
 stages:
   before-install:
     - name: "Remove machine-id"
