@@ -2,7 +2,7 @@
 install:
   poweroff: true
 stylus:
-  debug: false
+  debug: true
 stages:
   before-install:
     - name: "Remove machine-id"
