@@ -1,6 +1,8 @@
 #cloud-config
 install:
   poweroff: true
+stylus:
+  debug: false
 stages:
   before-install:
     - name: "Remove machine-id"
