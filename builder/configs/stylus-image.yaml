@@ -1,7 +1,7 @@
 #cloud-config
 install:
   reboot: false
-  poweroff: false
+  poweroff: true
 stylus:
   debug: false
 stages:
