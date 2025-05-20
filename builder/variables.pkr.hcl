@@ -14,3 +14,15 @@ variable "disk_size" {
   type    = string
   default = "50000M"
 }
+
+variable "communicator_user" {
+  type = string
+  default = "kairos"
+  sensitive = true
+}
+
+variable "communicator_password" {
+  type = string
+  default = "kairos"
+  sensitive = true
+}

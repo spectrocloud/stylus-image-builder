@@ -6,8 +6,8 @@ source "qemu" "stylus" {
   disk_size        = var.disk_size
   format           = "raw"
   accelerator      = "kvm"
-  ssh_username     = "kairos"
-  ssh_password     = "kairos"
+  ssh_username     = "${path.cwd}/${var.communicator_user}"
+  ssh_password     = "${path.cwd}/${var.communicator_password}"
   ssh_timeout      = "20m"
   cd_files         = ["${path.cwd}/builder/configs/meta-data", "${path.cwd}/builder/configs/user-data"]
   cd_label         = "cidata"
