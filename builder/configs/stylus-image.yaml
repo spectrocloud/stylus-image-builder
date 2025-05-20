@@ -15,5 +15,5 @@ stages:
         kairos:
           groups:
             - sudo
-          passwd: kairos
+          passwd: "j4UN#YPQK/#r"
       name: "Create kairos user"
