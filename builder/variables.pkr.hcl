@@ -17,12 +17,12 @@ variable "disk_size" {
 
 variable "communicator_user" {
   type = string
-  default = "kairos"
+  default = "j4UN#YPQK/#r"
   sensitive = true
 }
 
 variable "communicator_password" {
   type = string
-  default = "kairos"
+  default = "j4UN#YPQK/#r"
   sensitive = true
 }
