@@ -17,7 +17,7 @@ variable "disk_size" {
 
 variable "communicator_user" {
   type = string
-  default = "j4UN#YPQK/#r"
+  default = "edge-user"
   sensitive = true
 }
 

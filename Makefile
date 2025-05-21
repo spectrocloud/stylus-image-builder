@@ -13,6 +13,8 @@ BASE_IMG?=gcr.io/spectro-dev-public/stylus/stylus-image-builder-base:v1
 PALETTE_ENDPOINT?=""
 REGISTRATION_URL?=""
 EDGE_HOST_TOKEN?=""
+SSH_USER?=""
+SSH_PASSWORD?=""
 DISK_SIZE?="100000M"
 
 define run
@@ -25,6 +27,8 @@ define run
 		-e REGISTRATION_URL=$(REGISTRATION_URL) \
 		-e DISK_SIZE=$(DISK_SIZE) \
 		-e EDGE_HOST_TOKEN=$(EDGE_HOST_TOKEN) \
+		-e SSH_USER=$(SSH_USER) \
+		-e SSH_PASSWORD=$(SSH_PASSWORD) \
 		$(REPO):$(TAG) $1
 endef
 

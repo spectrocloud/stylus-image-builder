@@ -1,3 +1,11 @@
+
+locals {
+  user_data = templatefile("${path.cwd}/builder/configs/user-data.pkrtpl.hcl", {
+    ssh_user = var.communicator_user
+    ssh_password = var.communicator_password
+  })
+}
+
 source "qemu" "stylus" {
   headless         = var.headless
   iso_url          = "${path.cwd}/${var.iso}"
@@ -6,10 +14,13 @@ source "qemu" "stylus" {
   disk_size        = var.disk_size
   format           = "raw"
   accelerator      = "kvm"
-  ssh_username     = "${path.cwd}/${var.communicator_user}"
-  ssh_password     = "${path.cwd}/${var.communicator_password}"
+  ssh_username     = var.communicator_user
+  ssh_password     = var.communicator_password
   ssh_timeout      = "20m"
-  cd_files         = ["${path.cwd}/builder/configs/meta-data", "${path.cwd}/builder/configs/user-data"]
+  cd_content = {
+    "meta-data" = file("${path.cwd}/builder/configs/meta-data")
+    "user-data" = local.user_data
+  }
   cd_label         = "cidata"
   vm_name          = "stylus-image-builder"
   net_device       = "virtio-net"
