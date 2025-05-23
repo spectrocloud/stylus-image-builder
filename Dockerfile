@@ -14,7 +14,7 @@ ENV DISK_SIZE=${DISK_SIZE}
 #ENV REGISTRATION_URL=${REGISTRATION_URL}
 
 COPY builder /stylus-image-builder/builder/
-COPY builder/configs/stylus-image.yaml /stylus-image-builder/builder/configs/user-data
+COPY builder/configs/stylus-image.pkrtpl.hcl /stylus-image-builder/builder/configs/user-data.pkrtpl.hcl
 RUN touch /stylus-image-builder/builder/configs/meta-data
 COPY *.iso /stylus-image-builder/
 COPY entrypoint.sh /stylus-image-builder/

@@ -12,8 +12,8 @@ stages:
         - echo -n > /etc/machine-id
   initramfs:
     - users:
-        kairos:
+        ${ssh_user}:
           groups:
             - sudo
-          passwd: kairos
-      name: "Create kairos user"
+          passwd: ${ssh_password}
+      name: "Create ${ssh_user} user"

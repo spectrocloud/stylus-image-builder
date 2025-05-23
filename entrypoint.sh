@@ -19,4 +19,9 @@ if [ ! -f "$isoFile" ]; then
 fi
 
 echo "Building $1"
-PACKER_LOG=1 packer build -var "iso=$isoFile" -var "disk_size=$DISK_SIZE" -only $1.qemu.stylus builder
+
+if [[ -n "$SSH_USER" && -n "$SSH_PASSWORD" ]]; then
+  PACKER_LOG=1 packer build -var "iso=$isoFile" -var "disk_size=$DISK_SIZE" -var "communicator_user=$SSH_USER" -var "communicator_password=$SSH_PASSWORD" -only $1.qemu.stylus builder
+else
+  PACKER_LOG=1 packer build -var "iso=$isoFile" -var "disk_size=$DISK_SIZE" -only $1.qemu.stylus builder
+fi
